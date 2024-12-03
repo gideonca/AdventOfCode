@@ -2,27 +2,23 @@ using System.ComponentModel.DataAnnotations;
 
 class Day2
 {
-
     private string[] Lines = File.ReadAllLines("./data/day2.txt");
 
     public int CheckSafetyWithoutDampener()
     {
         int numberOfSafeReactors = 0;
         int safetyCount = 0;
-
         foreach(var line in Lines)
         {
             int[] intArray = line.Split(" ").Select(int.Parse).ToArray();
             numberOfSafeReactors += CheckSafety(intArray);
         }
-
         return numberOfSafeReactors;
     }
 
     public int CheckSafetyWithDampener()
     {
         int safety = 0;
-
         foreach(var line in Lines)
         {
             int[] intArray = line.Split(" ").Select(int.Parse).ToArray(); // Source of truth array
@@ -44,9 +40,7 @@ class Day2
             } else {
                 safety += CheckSafety(intArray);
             }
-
         }
-
         return safety;
     }
 

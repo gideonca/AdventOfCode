@@ -1,4 +1,9 @@
-Day2 day2 = new Day2();
+Day1 day1 = new Day1();
+// Console.WriteLine(day1_AoC.CalcDif());
+// Console.WriteLine(day1_AoC.calcSimilarityScore());
+
+
+// Day2 day2 = new Day2();
 // Without Dampener
 // Console.WriteLine("Number safe reactors (no Dampener): " + day2.CheckSafetyWithoutDampener());
 
