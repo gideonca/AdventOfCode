@@ -11,6 +11,15 @@ class Day3
         var regex = new Regex("mul\\(\\d+,\\d+\\)");
         foreach(var match in regex.Matches(data))
         {
+            string matchString = match.ToString();
+
+            var first_num_regex = new Regex("\\(\\s*(\\d+)\\s*,");
+            var second_num_regex = new Regex(",\\s*(\\d+)\\s*\\)");
+
+            var first_num = int.Parse(first_num_regex.Match(matchString).Groups[1].Value.ToString());
+            var second_num = int.Parse(second_num_regex.Match(matchString).Groups[1].Value.ToString());
+
+            product += first_num * second_num;
 
         }
 
