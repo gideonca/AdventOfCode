@@ -6,4 +6,8 @@ Day2 day2 = new Day2();
 // Console.WriteLine("Number safe reactors (Dampener): " + day2.CheckSafetyWithDampener());
 
 Day3 day3 = new Day3();
-Console.WriteLine(day3.ParseData());
+// Parse data
+Console.WriteLine("Parse data phase 1: " + day3.ParseData());
+
+// Parse data with special condition
+Console.WriteLine("Parse data phase 2: " + day3.ParseDataRefined());
