@@ -1,3 +1,5 @@
+using System.Text.RegularExpressions;
+
 class Day3
 {
     // TODO: Regex through text file
@@ -6,6 +8,11 @@ class Day3
     public int ParseData()
     {
         int product = 0;
+        var regex = new Regex("mul\\(\\d+,\\d+\\)");
+        foreach(var match in regex.Matches(data))
+        {
+
+        }
 
         return product;
     }
