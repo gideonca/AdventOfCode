@@ -8,29 +8,18 @@ class Day3
 
     public int ParseData()
     {
-        // Value = 153469856
         string pattern = @"mul\(\d+,\d+\)";
         MatchCollection matches = Regex.Matches(data, pattern);
-        return GetProduct(matches);;
+        return GetProduct(matches.Select(m => m.Value).ToList());;
     }
 
     public int ParseDataRefined()
     {
-        // Bad value = 6589693
-
-        // Must use look aheads and look behinds
-        // string pattern = @"do\(\)\s+(.*?)(?:\s+don't\(\)|\s+do\(\))";
-        // string pattern = @"do\(\)(?:(?!don't\(\)).)*?mul\(\d+,\d+\)"; // use positive look behind
-        // string pattern = @"do\((.*?)don't\(";
-        // MatchCollection matches = Regex.Matches(data, pattern);
-
-        // return GetProduct(matches);
-
         string pattern = @"(do\(\)|don't\(\)|mul\(\d+,\d+\))";
         MatchCollection matches = Regex.Matches(data, pattern);
 
         bool isEnabled = true;  // Start with mul instructions enabled
-        List<string> enabledMulInstructions = new List<string>();
+        List<string> enabledMulInstructions = new List<string>(); // Create a list to store enabled instructions
 
         foreach (Match match in matches)
         {
@@ -52,22 +41,10 @@ class Day3
             }
         }
 
-        int product = 0;
-        foreach (string mul in enabledMulInstructions)
-        {
-            var first_num_regex = new Regex("\\(\\s*(\\d+)\\s*,");
-            var second_num_regex = new Regex(",\\s*(\\d+)\\s*\\)");
-
-            var first_num = int.Parse(first_num_regex.Match(mul.ToString()).Groups[1].Value.ToString());
-            var second_num = int.Parse(second_num_regex.Match(mul.ToString()).Groups[1].Value.ToString());
-
-            product += first_num * second_num;
-        }
-
-        return product;
+        return GetProduct(enabledMulInstructions);
     }
 
-    private int GetProduct(MatchCollection matches)
+    private int GetProduct(List<string> matches)
     {
         int product = 0;
         foreach(var match in matches)
