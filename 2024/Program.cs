@@ -10,9 +10,14 @@ Day1 day1 = new Day1();
 // With Dampener
 // Console.WriteLine("Number safe reactors (Dampener): " + day2.CheckSafetyWithDampener());
 
-Day3 day3 = new Day3();
+// Day3 day3 = new Day3();
 // Parse data
-Console.WriteLine("Parse data phase 1: " + day3.ParseData());
+// Console.WriteLine("Parse data phase 1: " + day3.ParseData());
 
 // Parse data with special condition
-Console.WriteLine("Parse data phase 2: " + day3.ParseDataRefined());
+// Console.WriteLine("Parse data phase 2: " + day3.ParseDataRefined());
+
+
+Day4 day4 = new Day4();
+// Phase 1
+Console.WriteLine("Phase 1: " + day4.CountWords_Phase1());
