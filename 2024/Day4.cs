@@ -11,6 +11,15 @@ class Day4
 
         char[,] wordMatrix = new char[rows,cols];
 
+        int currentXPos = 0;
+        int currentYPos = 0;
+
+        // TODO: 
+        // Do a while loop? do { } while { currentXPos < rows && currentYPos < cols}
+        // look at top left corner (0,0)
+        // check character, if it's X check adjacent (0,1) (1,0) (1,1) for M
+        // check 
+
         return totalFound;
     }
 }
