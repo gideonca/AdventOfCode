@@ -1,3 +1,5 @@
+using System.Collections;
+
 class Day4
 {
     private string[] data = File.ReadAllLines("./data/day4_demo.txt");
@@ -30,9 +32,26 @@ class Day4
         // look at top left corner (0,0)
         // check character, if it's X check adjacent (0,1) (1,0) (1,1) for M
         // check 
-        do{
-            
-        } while (currentXPos < rows && currentYPos < cols);
+
+        for(int r = 0; r < rows; r++)
+        {
+            for(int c = 0; c < cols; c++)
+            {
+                if(wordMatrix[r,c].Equals('X'))
+                {
+                    currentXPos = r;
+                    currentYPos = c;
+                    string direction = "";
+                    if(r == 0) // special condition for top row
+                    {
+                        if(c == 0) // Check for top left beign X
+                        {
+                            // There can only be 8 potential directions, need to start at the left and go counter clockwise to find the letter M
+                        }
+                    }
+                }
+            }
+        }
 
         return totalFound;
     }
