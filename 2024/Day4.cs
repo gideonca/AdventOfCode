@@ -61,19 +61,17 @@ class Day4
             {
                 if(wordMatrix[row, col] == 'X')
                     wordMatrix[row, col] = '.';
-
-                
             }
         }
 
-        for (int row = 0; row < rows - 1; row++)
-        {
-            for (int col = 0; col < cols - 1; col++)
-            {
-                Console.Write(wordMatrix[row, col]);
-            }
-            Console.WriteLine();
-        }
+        // for (int row = 0; row < rows - 1; row++)
+        // {
+        //     for (int col = 0; col < cols - 1; col++)
+        //     {
+        //         Console.Write(wordMatrix[row, col]);
+        //     }
+        //     Console.WriteLine();
+        // }
 
         for (int row = 1; row < rows - 1; row++)
         {
@@ -97,8 +95,6 @@ class Day4
                 }
             }
         }
-
-        
 
         return count;
     }
