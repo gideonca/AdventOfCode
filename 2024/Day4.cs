@@ -3,56 +3,106 @@ using System.Collections;
 class Day4
 {
     private string[] data = File.ReadAllLines("./data/day4_demo.txt");
-
-    public int CountWords_Phase1()
+#region Phase1
+    private bool SearchWord(char[,] grid, string word, int row, int col, int rowDir, int colDir)
     {
-        int totalFound = 0;
-
-        int cols = data.Count();
-        int rows = data[0].Length;
-
-        char[,] wordMatrix = new char[rows,cols];
-        var dataArray = data.ToArray();
-
-        // Populate character matrix
-        int row = 0;
-        foreach(var line in data)
+        int wordLen = word.Length;
+        for (int i = 0; i < wordLen; i++)
         {
-            for(int i = 0; i < line.ToArray().Length; i++)
+            int newRow = row + i * rowDir;
+            int newCol = col + i * colDir;
+
+            if (newRow < 0 || newCol < 0 || newRow >= grid.GetLength(0) || newCol >= grid.GetLength(1))
+                return false;
+            
+            if (grid[newRow, newCol] != word[i])
+                return false;
+        }
+        return true;
+    }
+
+    public int CountWordOccurrences(string word)
+    {
+        int[] rowDir = { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int[] colDir = { -1, 0, 1, -1, 1, -1, 0, 1 };
+        int count = 0;
+        int cols, rows;
+        char[,] wordMatrix;
+        GetWordMatrix(out cols, out rows, out wordMatrix);
+
+        for (int row = 0; row < rows; row++)
+        {
+            for (int col = 0; col < cols; col++)
             {
-                wordMatrix[row, i] = line[i];
+                if (wordMatrix[row, col] == word[0])
+                {
+                    for (int dir = 0; dir < 8; dir++)
+                    {
+                        if (SearchWord(wordMatrix, word, row, col, rowDir[dir], colDir[dir])) count++;
+                    }
+                }
             }
         }
+        return count;
+    }
+#endregion
 
-        int currentXPos = 0;
-        int currentYPos = 0;
+#region Phase 2
+        public int CountWordInXShape(string word)
+    {
+        int cols, rows;
+        char[,] wordMatrix;
+        GetWordMatrix(out cols, out rows, out wordMatrix);
+        int count = 0;
 
-        // TODO: 
-        // Do a while loop? do { } while { currentXPos < rows && currentYPos < cols}
-        // look at top left corner (0,0)
-        // check character, if it's X check adjacent (0,1) (1,0) (1,1) for M
-        // check 
-
-        for(int r = 0; r < rows; r++)
+        for (int row = 1; row < rows - 2; row++)
         {
-            for(int c = 0; c < cols; c++)
+            for (int col = 1; col < cols - 2; col++)
             {
-                if(wordMatrix[r,c].Equals('X'))
+                if (wordMatrix[row, col] == 'A')
                 {
-                    currentXPos = r;
-                    currentYPos = c;
-                    string direction = "";
-                    if(r == 0) // special condition for top row
+
+                    char upperLeft = wordMatrix[row - 1, col - 1];
+                    char lowerRight = wordMatrix[row + 1, col + 1];
+                    char upperRight = wordMatrix[row -1, col + 1];
+                    char lowerLeft = wordMatrix[row + 1, col - 1];
+
+
+                    if((wordMatrix[row - 1, col - 1] == 'M' && wordMatrix[row + 1, col + 1] == 'S') || 
+                    (wordMatrix[row - 1, col - 1] == 'S' && wordMatrix[row + 1, col + 1] == 'M') || 
+                    (wordMatrix[row - 1, col + 1] == 'M' && wordMatrix[row + 1, col - 1] == 'S') ||
+                    (wordMatrix[row - 1, col + 1] == 'S' && wordMatrix[row + 1, col - 1] == 'M'))
                     {
-                        if(c == 0) // Check for top left beign X
-                        {
-                            // There can only be 8 potential directions, need to start at the left and go counter clockwise to find the letter M
-                        }
+                        wordMatrix[row, col] = '.';
+                        wordMatrix[row - 1, col - 1] = '.';
+                        wordMatrix[row + 1, col + 1] = '.';
+                        wordMatrix[row -1, col + 1] = '.';
+                        wordMatrix[row + 1, col - 1] = '.';
+                        count++;
                     }
                 }
             }
         }
 
-        return totalFound;
+        return count;
+    }
+#endregion
+
+    private void GetWordMatrix(out int cols, out int rows, out char[,] wordMatrix)
+    {
+        cols = data.Count();
+        rows = data[0].Length;
+        wordMatrix = new char[rows, cols];
+
+        // Populate character matrix
+        int row = 0;
+        foreach (var line in data)
+        {
+            for (int i = 0; i < line.ToArray().Length; i++)
+            {
+                wordMatrix[row, i] = line[i];
+            }
+            row++;
+        }
     }
 }

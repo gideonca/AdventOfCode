@@ -20,4 +20,6 @@ Day1 day1 = new Day1();
 
 Day4 day4 = new Day4();
 // Phase 1
-Console.WriteLine("Phase 1: " + day4.CountWords_Phase1());
+Console.WriteLine("Phase 1: " + day4.CountWordOccurrences("XMAS"));
+// Phas3 2
+Console.WriteLine("Phase 2: " + day4.CountWordInXShape("MAS"));
