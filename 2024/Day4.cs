@@ -2,7 +2,7 @@ using System.Collections;
 
 class Day4
 {
-    private string[] data = File.ReadAllLines("./data/day4_demo.txt");
+    private string[] data = File.ReadAllLines("./data/day4.txt");
 #region Phase1
     private bool SearchWord(char[,] grid, string word, int row, int col, int rowDir, int colDir)
     {
@@ -67,11 +67,17 @@ class Day4
                     char upperRight = wordMatrix[row -1, col + 1];
                     char lowerLeft = wordMatrix[row + 1, col - 1];
 
+                    /*
+                    upperLeft == M lowerRight == S && upperRight == M lowerLeft == S
+                    upperLeft == M lowerRight == S && upperRight == S lowerLeft == M
+                    upperLeft == S lowerRight == M && upperRight == M lowerLeft == S
+                    upperLeft == S lowerRight == M && upperRight == S lowerLeft == M
+                    */
 
-                    if((wordMatrix[row - 1, col - 1] == 'M' && wordMatrix[row + 1, col + 1] == 'S') || 
-                    (wordMatrix[row - 1, col - 1] == 'S' && wordMatrix[row + 1, col + 1] == 'M') || 
-                    (wordMatrix[row - 1, col + 1] == 'M' && wordMatrix[row + 1, col - 1] == 'S') ||
-                    (wordMatrix[row - 1, col + 1] == 'S' && wordMatrix[row + 1, col - 1] == 'M'))
+                    if(((upperLeft == 'M' && lowerRight == 'S') && (upperRight == 'S' && lowerLeft == 'M')) ||
+                        ((upperLeft == 'S' && lowerRight == 'M') && (upperRight == 'S' && lowerLeft == 'M')) ||
+                        ((upperLeft == 'S' && lowerRight == 'M') && (upperRight == 'M' && lowerLeft == 'S')) ||
+                        ((upperLeft == 'M' && lowerRight == 'S') && (upperRight == 'M' && lowerLeft == 'S')))
                     {
                         wordMatrix[row, col] = '.';
                         wordMatrix[row - 1, col - 1] = '.';
