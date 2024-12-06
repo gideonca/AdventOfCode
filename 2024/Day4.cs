@@ -55,9 +55,29 @@ class Day4
         GetWordMatrix(out cols, out rows, out wordMatrix);
         int count = 0;
 
-        for (int row = 1; row < rows - 2; row++)
+        for (int row = 0; row < rows - 1; row++)
         {
-            for (int col = 1; col < cols - 2; col++)
+            for (int col = 0; col < cols - 1; col++)
+            {
+                if(wordMatrix[row, col] == 'X')
+                    wordMatrix[row, col] = '.';
+
+                
+            }
+        }
+
+        for (int row = 0; row < rows - 1; row++)
+        {
+            for (int col = 0; col < cols - 1; col++)
+            {
+                Console.Write(wordMatrix[row, col]);
+            }
+            Console.WriteLine();
+        }
+
+        for (int row = 1; row < rows - 1; row++)
+        {
+            for (int col = 1; col < cols - 1; col++)
             {
                 if (wordMatrix[row, col] == 'A')
                 {
@@ -66,29 +86,19 @@ class Day4
                     char lowerRight = wordMatrix[row + 1, col + 1];
                     char upperRight = wordMatrix[row -1, col + 1];
                     char lowerLeft = wordMatrix[row + 1, col - 1];
-
-                    /*
-                    upperLeft == M lowerRight == S && upperRight == M lowerLeft == S
-                    upperLeft == M lowerRight == S && upperRight == S lowerLeft == M
-                    upperLeft == S lowerRight == M && upperRight == M lowerLeft == S
-                    upperLeft == S lowerRight == M && upperRight == S lowerLeft == M
-                    */
-
+                    
                     if(((upperLeft == 'M' && lowerRight == 'S') && (upperRight == 'S' && lowerLeft == 'M')) ||
                         ((upperLeft == 'S' && lowerRight == 'M') && (upperRight == 'S' && lowerLeft == 'M')) ||
                         ((upperLeft == 'S' && lowerRight == 'M') && (upperRight == 'M' && lowerLeft == 'S')) ||
                         ((upperLeft == 'M' && lowerRight == 'S') && (upperRight == 'M' && lowerLeft == 'S')))
                     {
-                        wordMatrix[row, col] = '.';
-                        wordMatrix[row - 1, col - 1] = '.';
-                        wordMatrix[row + 1, col + 1] = '.';
-                        wordMatrix[row -1, col + 1] = '.';
-                        wordMatrix[row + 1, col - 1] = '.';
                         count++;
                     }
                 }
             }
         }
+
+        
 
         return count;
     }
