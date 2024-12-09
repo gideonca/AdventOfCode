@@ -18,8 +18,13 @@ Day1 day1 = new Day1();
 // Console.WriteLine("Parse data phase 2: " + day3.ParseDataRefined());
 
 
-Day4 day4 = new Day4();
+// Day4 day4 = new Day4();
+// // Phase 1
+// Console.WriteLine("Phase 1: " + day4.CountWordOccurrences("XMAS"));
+// // Phas3 2
+// Console.WriteLine("Phase 2: " + day4.CountWordInXShape("MAS"));
+
+
+Day9 day9 = new Day9();
 // Phase 1
-Console.WriteLine("Phase 1: " + day4.CountWordOccurrences("XMAS"));
-// Phas3 2
-Console.WriteLine("Phase 2: " + day4.CountWordInXShape("MAS"));
+Console.WriteLine("Phase 1: " + day9.CalculateFileChecksum());
