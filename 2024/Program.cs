@@ -28,3 +28,5 @@ Day1 day1 = new Day1();
 Day9 day9 = new Day9();
 // Phase 1
 Console.WriteLine("Phase 1: " + day9.CalculateFileChecksum());
+// Day5 day5 = new Day5();
+// Console.WriteLine("Phase 1: " + day5.GetListOfRules().Count);
